@@ -43,6 +43,7 @@ if __name__ == "__main__":
     # )
     #
 
+    # tworzenie modelu
     rf = create_model()
 
 
@@ -66,13 +67,8 @@ if __name__ == "__main__":
             )
 
             asm_features.append(set(x_train_fold))
-<<<<<<< HEAD
-            rf = train_random_forest()
-            y_pred = predict_model(rf, x_test_fold)
-=======
-            model = train_random_forest(x_train_fold, y_train_fold)
-            y_pred = predict_model(model, x_test_fold)
->>>>>>> bbb94c16a3f5c414ea1a70430c32f5c790978f57
+            rf_model = train_random_forest(x_train_fold, y_train_fold, rf)
+            y_pred = predict_model(rf_model, x_test_fold)
 
             acc, auc, mcc, f1 = evaluate_model(
                 config["model_name"],

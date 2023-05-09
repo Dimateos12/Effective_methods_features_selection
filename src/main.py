@@ -11,7 +11,8 @@ from data.read_and_preprocess_data import read_and_preprocess_data
 from models.train_model import train_random_forest
 from models.predict_model import predict_model
 from features.measuring_stability_of_FS import calculate_asm
-
+from create_model import create_model
+from save_model import save_model
 
 if __name__ == "__main__":
     # Wczytywanie konfiguracji
@@ -36,11 +37,14 @@ if __name__ == "__main__":
     mcc_list = []
     f1_list = []
 
-    x_train_fold = filters(
-        X, y, config["n_features"], config["filter"], df
-    )
+    #Test filtrów
+    # x_train_fold = filters(
+    #     X, y, config["n_features"], config["filter"], df
+    # )
+    #
 
-    print(x_train_fold)
+    rf = create_model()
+
 
     # K krotna walidacja
     train_indices_list, test_indices_list = cross_validation(
@@ -62,8 +66,8 @@ if __name__ == "__main__":
             )
 
             asm_features.append(set(x_train_fold))
-            model = train_random_forest()
-            y_pred = predict_model(model, x_test_fold)
+            rf = train_random_forest()
+            y_pred = predict_model(rf, x_test_fold)
 
             acc, auc, mcc, f1 = evaluate_model(
                 config["model_name"],
@@ -106,4 +110,6 @@ if __name__ == "__main__":
         time.time() - t0,
         asm_features
     )
+    save_model(rf)
+
 

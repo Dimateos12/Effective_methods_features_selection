@@ -62,12 +62,17 @@ if __name__ == "__main__":
             x_train_fold, x_test_fold = x_scaled[train_index], x_scaled[test_index]
             y_train_fold, y_test_fold = y[train_index], y[test_index]
             x_train_fold = filters(
-                x_train_fold, y_train_fold, config["n_features"], config["filter"]
+                x_train_fold, y_train_fold, config["n_features"], config["filter"], df
             )
 
             asm_features.append(set(x_train_fold))
+<<<<<<< HEAD
             rf = train_random_forest()
             y_pred = predict_model(rf, x_test_fold)
+=======
+            model = train_random_forest(x_train_fold, y_train_fold)
+            y_pred = predict_model(model, x_test_fold)
+>>>>>>> bbb94c16a3f5c414ea1a70430c32f5c790978f57
 
             acc, auc, mcc, f1 = evaluate_model(
                 config["model_name"],

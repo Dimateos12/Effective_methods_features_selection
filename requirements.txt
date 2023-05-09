@@ -19,4 +19,3 @@ mdfs==1.5.2
 isort==5.12.0
 black==23.3.0
 flake8==6.0.0
-setuptools~=67.6.1

@@ -58,11 +58,11 @@ if __name__ == "__main__":
             x_train_fold, x_test_fold = x_scaled[train_index], x_scaled[test_index]
             y_train_fold, y_test_fold = y[train_index], y[test_index]
             x_train_fold = filters(
-                x_train_fold, y_train_fold, config["n_features"], config["filter"]
+                x_train_fold, y_train_fold, config["n_features"], config["filter"], df
             )
 
             asm_features.append(set(x_train_fold))
-            model = train_random_forest()
+            model = train_random_forest(x_train_fold, y_train_fold)
             y_pred = predict_model(model, x_test_fold)
 
             acc, auc, mcc, f1 = evaluate_model(

@@ -66,7 +66,7 @@ if __name__ == "__main__":
                 x_train_fold, y_train_fold, config["n_features"], config["filter"], df
             )
 
-            asm_features.append(set(x_train_fold))
+            asm_features.append(x_train_fold)
             rf_model = train_random_forest(x_train_fold, y_train_fold, rf)
             y_pred = predict_model(rf_model, x_test_fold)
 

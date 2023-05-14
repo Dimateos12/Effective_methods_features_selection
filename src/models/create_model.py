@@ -1,7 +1,7 @@
 from sklearn.ensemble import RandomForestClassifier
 
 
-def create_model(n_estimators=100, max_depth=None):
+def create_model(n_estimators=None, max_depth=None):
     """
     Function that creates a random forest model with specified hyperparameters.
 

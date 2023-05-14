@@ -1,19 +1,22 @@
 import csv
-
 import numpy as np
+from config.load_config import load_config
+
+config = load_config("my_configuration.yaml")
 
 
 def evaluate_model_mean(
-    model_name,
-    file_name,
-    feature_selection_method,
-    lst_acc,
-    lst_auc,
-    lst_mcc,
-    lst_f1,
-    num_of_features,
-    time,
-    stability,
+        lst_acc,
+        lst_auc,
+        lst_mcc,
+        lst_f1,
+        time,
+        stability,
+        model_name = config['model_name'],
+        file_name = config['name_file_30_repeat'],
+        feature_selection_method = config['filter'],
+        num_of_features=config['n_features'],
+
 ):
     """
     Calculates mean values of evaluation metrics and saves the results to a CSV file.

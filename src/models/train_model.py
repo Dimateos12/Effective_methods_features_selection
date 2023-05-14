@@ -1,4 +1,4 @@
-def train_random_forest(X_train, y_train, rf_model, n_estimators=100, max_depth=None, random_state=None):
+def train_random_forest(X_train, y_train, X_test, rf_model, n_estimators=200, max_depth=None, random_state=None):
     """
     Trains a random forest classifier on the input training data.
 
@@ -31,4 +31,4 @@ def train_random_forest(X_train, y_train, rf_model, n_estimators=100, max_depth=
     rf_model.fit(X_train, y_train)
 
     # Return the trained model
-    return rf_model
+    return rf_model.predict(X_test)

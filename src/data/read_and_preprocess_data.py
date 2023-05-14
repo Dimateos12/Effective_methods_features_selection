@@ -1,7 +1,13 @@
 import pandas as pd
+import os
+from config.load_config import load_config
+
+config = load_config("my_configuration.yaml")
 
 
-def read_and_preprocess_data(file_path, target_column, num_columns=1000):
+def read_and_preprocess_data(
+        file_path=os.path.join(config["data_directory"], config["data_name"]),
+        target_column=config["target_name"]):
     """
     Reads a CSV file from a given path, preprocesses it,
     and returns the preprocessed data.
@@ -24,7 +30,6 @@ def read_and_preprocess_data(file_path, target_column, num_columns=1000):
     df (pandas.DataFrame): The original dataframe
         that was read from the CSV file.
     """
-
     df = pd.read_csv(file_path)
     X = df.drop(columns=[target_column]).to_numpy()
     y = df[target_column].to_numpy()

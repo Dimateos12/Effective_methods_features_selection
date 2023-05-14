@@ -19,6 +19,5 @@ def predict_model(model, X_test):
     # Perform predictions on the test data
     y_pred = model.predict(X_test)
 
-
     # Return the predictions
     return y_pred

@@ -25,11 +25,12 @@ Project Organization
     │                         generated with `pip freeze > requirements.txt`
     │
     ├── src                <- Source code for use in this project.
-    │   ├── __init__.py    <- Makes src a Python module
+    │   ├── main.py    <- Main file of script
     │   │
-    │   ├── unitTest        <- Unit Test for testing modules 
-    │   │ 
+    │   │   
     │   ├── data           <- Scripts to generate data
+    │   │   └──read_and_preprocess_data.py <- file to read and preprocess data for next steps 
+    │   │
     │   ├── evaluate  <- Function to save results to csv files 
     │   │
     │   ├── features       <- Scripts to turn raw data into features for modeling

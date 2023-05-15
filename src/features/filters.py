@@ -29,7 +29,7 @@ def filters(x, y, module, num_of_features=config['n_features']):
     """
 
     if module == "ReliefF":
-        rf = ReliefF(n_features_to_select=num_of_features, n_neighbors=100)
+        rf = ReliefF(n_features_to_select=num_of_features, n_neighbors=100, n_jobs=-1)
         rf.fit(x, y)
         return rf.transform(x)
     elif module == "Mrmr":

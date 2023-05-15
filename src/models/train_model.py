@@ -1,4 +1,4 @@
-def train_random_forest(X_train, y_train, X_test, rf_model, n_estimators=200, max_depth=None, random_state=None):
+def train_random_forest(X_train, y_train, X_test, rf_model, n_estimators=200, max_depth=None, random_state=42):
     """
     Trains a random forest classifier on the input training data.
 

@@ -40,10 +40,10 @@ def filters(x, y, module, num_of_features=config['n_features']):
         X = pd.DataFrame(x)
         y = pd.Series(y)
         selected_features_names = mrmr_classif(X=X, y=y, K=num_of_features)
-        print(selected_features_names)
         features = X[selected_features_names]
         return features.index
     elif module == "U-test":
+        print("Trwa selekcja cech metoda U-test....")
         X_feature = utest(x, y, )
         return X_feature
     # elif module == "MDFS":

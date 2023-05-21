@@ -12,10 +12,9 @@ repeat: 10
 
 #FeatureSelection
 n_features: 5
-filter: "ReliefF"
+filter: "U-test"
+#filter: "Mrmr"
 #filter: "Mrmr"
 
 #File
-name_each_result: "Result.csv"
-name_file_k_fold: "MeanResultsKFold.csv"
-name_file_30_repeat: "10MeanResults.csv"
+name_file_30_repeat: "10MeanResults_U-test.csv.csv"

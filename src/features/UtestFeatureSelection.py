@@ -1,27 +1,28 @@
+import numpy as np
 from scipy.stats import mannwhitneyu
-import pandas as pd
 
-
-def utest(X, y, k=100):
+def utest(X, y, alpha=0.05):
     """
-    Select top k features using the Mann-Whitney U-test.
+    Wybiera cechy z użyciem testu U-Manna.
 
-    Parameters:
-        X (array-like): The input data matrix.
-        y (array-like): The target variable vector.
-        k (int): The number of features to select. Default is 100.
+    Parametry:
+    X (array-like): Macierz cech, gdzie wiersze to próbki, a kolumny to cechy.
+    y (array-like): Wektor wartości docelowych.
+    alpha (float): Poziom istotności testu (domyślnie 0.05).
 
-    Returns:
-        (list): The indices of the selected features.
+    Zwraca:
+    selected_features (list): Lista indeksów wybranych cech.
+
     """
-    n_features = X.shape[1]
-    p_values = []
 
-    for i in range(n_features):
-        stat, p = mannwhitneyu(X[:, i], y, alternative='two-sided')
-        p_values.append(p)
+    num_features = X.shape[1]
+    selected_features = []
 
-    df = pd.DataFrame({'index': range(n_features), 'p_value': p_values})
-    df = df.sort_values(by=['p_value'], ascending=True).iloc[:k]
+    for i in range(num_features):
+        feature_values = X[:, i]
+        stat, p_value = mannwhitneyu(feature_values[y == 0], feature_values[y == 1], alternative='two-sided')
 
-    return df['index'].tolist()
+        if p_value <= alpha:
+            selected_features.append(i)
+
+    return [idx for idx, _ in enumerate(selected_features)]

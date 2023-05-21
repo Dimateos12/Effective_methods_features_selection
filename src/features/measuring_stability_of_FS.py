@@ -1,4 +1,3 @@
-import pandas as pd
 def calculate_asm(feature_sets):
     """
     Calculates the ASM for a list of feature sets.
@@ -10,7 +9,7 @@ def calculate_asm(feature_sets):
     Returns:
         float: The ASM value.
     """
-    feature_sets = [set(tuple(pd.DataFrame(fs))) for fs in feature_sets]
+    feature_sets = [set([fs]) for fs in feature_sets]  # Convert integers to singleton sets
     c = len(feature_sets)
     m = len(feature_sets[0])  # Assumes all feature sets have the same length
 
@@ -20,9 +19,9 @@ def calculate_asm(feature_sets):
             intersection_size = len(feature_sets[i].intersection(feature_sets[j]))
             min_size = min(len(feature_sets[i]), len(feature_sets[j]))
             similarity = (
-                intersection_size
-                - len(feature_sets[i]) * len(feature_sets[j]) / min_size
-                - max(0, len(feature_sets[i]) + len(feature_sets[j]) - m)
+                    intersection_size
+                    - len(feature_sets[i]) * len(feature_sets[j]) / min_size
+                    - max(0, len(feature_sets[i]) + len(feature_sets[j]) - m)
             )
             similarity_sum += similarity
 

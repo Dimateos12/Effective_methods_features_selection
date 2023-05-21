@@ -1,8 +1,6 @@
-from cross_validation import cross_validation
-from get_score import get_scores
-
-
-def run_cv(X, y, config):
+from crossValidation.cross_validation import cross_validation
+from crossValidation.get_score import get_scores
+def run_cv(X, y, config, ):
     """
     Runs cross-validation for the given dataset and configuration.
     Args:
@@ -21,6 +19,7 @@ def run_cv(X, y, config):
     lst_auc = []
     lst_f1 = []
     lst_mcc = []
+    lst_amc = []
 
     def run_fold(X_train, X_test, y_train, y_test):
         """
@@ -38,6 +37,7 @@ def run_cv(X, y, config):
         lst_auc.append(scores[1])
         lst_f1.append(scores[2])
         lst_mcc.append(scores[3])
+        lst_amc.append(scores[4])
 
     def run_repeat():
         """
@@ -53,4 +53,4 @@ def run_cv(X, y, config):
         print(f"Repeat: {i + 1}")
         run_repeat()
 
-    return lst_acc, lst_auc, lst_f1, lst_mcc
+    return lst_acc, lst_auc, lst_f1, lst_mcc, lst_amc

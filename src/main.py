@@ -12,6 +12,6 @@ if __name__ == "__main__":
 
     X, y, df = read_and_preprocess_data(os.path.join(config["data_directory"], config["data_name"]))
 
-    lst_acc, lst_auc, lst_f1, lst_mcc = run_cv(X, y, config)
+    lst_acc, lst_auc, lst_f1, lst_mcc, lst_amc = run_cv(X, y, config)
 
-    evaluate_model_mean(lst_acc, lst_auc, lst_mcc, lst_f1, time.time() - t0, 0)
+    evaluate_model_mean(lst_acc, lst_auc, lst_mcc, lst_f1, time.time() - t0, lst_amc)

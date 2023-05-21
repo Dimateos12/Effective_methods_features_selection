@@ -48,6 +48,7 @@ def evaluate_model_mean(
     auc_mean = np.mean(lst_auc)
     mcc_mean = np.mean(lst_mcc)
     f1_mean = np.mean(lst_f1)
+    amc = np.mean(stability)
 
     # Zapisanie wyników do pliku CSV
     with open("../reports/csv/" + file_name, mode="a", newline="") as csv_file:
@@ -79,6 +80,6 @@ def evaluate_model_mean(
                 "F1": f1_mean,
                 "Number of Features": num_of_features,
                 "Time": time,
-                "MeasuringFS": stability,
+                "MeasuringFS": amc,
             }
         )

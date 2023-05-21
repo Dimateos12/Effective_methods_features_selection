@@ -1,3 +1,4 @@
+from features.measuring_stability_of_FS import calculate_asm
 from models.create_model import create_model
 from sklearn.metrics import accuracy_score, roc_auc_score, f1_score, matthews_corrcoef
 from features.filters import filters
@@ -17,4 +18,5 @@ def get_scores(X_train, X_test, y_train, y_test):
     auc = roc_auc_score(y_test, y_pred)
     f1 = f1_score(y_test, y_pred)
     mcc = matthews_corrcoef(y_test, y_pred)
-    return [acc, auc, f1, mcc]
+    asm = calculate_asm(features_to_keep)
+    return [acc, auc, f1, mcc, asm]

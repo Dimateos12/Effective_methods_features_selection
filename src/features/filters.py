@@ -2,11 +2,13 @@
 import numpy as np
 import pandas as pd
 from mrmr import mrmr_classif
-from skrebate import ReliefF
+# from skrebate import ReliefF
 from features.UtestFeatureSelection import utest
 from config.load_config import load_config
+from ReliefF import ReliefF
 
 config = load_config("my_configuration.yaml")
+
 
 ##DODAC ZWRACANIE INDEKSOW DO KAZDEGO FILTRA
 def filters(x, y, module, num_of_features=config['n_features']):
@@ -29,17 +31,20 @@ def filters(x, y, module, num_of_features=config['n_features']):
     """
 
     if module == "ReliefF":
-        rf = ReliefF(n_features_to_select=num_of_features, n_neighbors=100, n_jobs=-1)
-        rf.fit(x, y)
-        return rf.transform(x)
+        print("Trwa selekcja cech metoda ReliefF....")
+        rf = ReliefF(n_features_to_keep=num_of_features, n_neighbors=5)
+        features = rf.fit_transform(x, y)
+        selected_feature_indices = rf.top_features[:rf.n_features_to_keep]
+        return selected_feature_indices
     elif module == "Mrmr":
         X = pd.DataFrame(x)
         y = pd.Series(y)
         selected_features_names = mrmr_classif(X=X, y=y, K=num_of_features)
+        print(selected_features_names)
         features = X[selected_features_names]
         return features.index
     elif module == "U-test":
-        X_feature = utest(x, y,)
+        X_feature = utest(x, y, )
         return X_feature
     # elif module == "MDFS":
     #     y = y.astype(np.int32)

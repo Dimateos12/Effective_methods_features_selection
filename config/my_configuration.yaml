@@ -11,8 +11,9 @@ k_fold: 5
 repeat: 10
 
 #FeatureSelection
-n_features: 60
-filter: "Mrmr"
+n_features: 5
+filter: "ReliefF"
+#filter: "Mrmr"
 
 #File
 name_each_result: "Result.csv"

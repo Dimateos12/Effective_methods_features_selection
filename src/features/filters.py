@@ -10,7 +10,7 @@ from ReliefF import ReliefF
 config = load_config("my_configuration.yaml")
 
 
-##DODAC ZWRACANIE INDEKSOW DO KAZDEGO FILTRA
+
 def filters(x, y, module, num_of_features=config['n_features']):
     """
     Selects a given number of features from the input data using the

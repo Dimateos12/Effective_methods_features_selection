@@ -1,7 +1,8 @@
 import numpy as np
 from scipy.stats import mannwhitneyu
 
-def utest(X, y, num_features ,alpha=0.05):
+
+def utest(X, y, num_features, alpha=0.05):
     """
     Wybiera cechy z użyciem testu U-Manna.
 
@@ -27,6 +28,5 @@ def utest(X, y, num_features ,alpha=0.05):
     # Sortowanie p-wartości w porządku rosnącym
     p_values.sort(key=lambda x: x[1])
 
-    selected_features = [idx for idx, _ in p_values[:num_features]]
-
+    selected_features = [pair[0] for pair in p_values[:num_features]]
     return selected_features

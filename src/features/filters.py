@@ -41,15 +41,14 @@ def filters(x, y, module, num_of_features=config['n_features']):
         y = pd.Series(y)
         selected_features_names = mrmr_classif(X=X, y=y, K=num_of_features)
         features = X[selected_features_names]
-        return features.index
+        return features.columns.tolist()
     elif module == "U-test":
         print("Trwa selekcja cech metoda U-test....")
-        X_feature = utest(x, y,num_of_features )
+        X_feature = utest(x, y, num_of_features)
         return X_feature
     elif module == "MDFS":
         print("Trwa selekcja cech metoda MDFS....")
         y = y.astype(np.int32)
-        my_array = np.asfortranarray(x)
-        mdfs_feature = mdfs.run(my_array, y, n_contrast=1)
-        print(mdfs_feature['relevant_variables'])
-        return mdfs_feature['relevant_variables']
+        mdfs_feature = mdfs.compute_max_ig(x, y)
+        print(mdfs_feature)
+        return mdfs_feature.max_igs

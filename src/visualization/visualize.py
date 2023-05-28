@@ -38,7 +38,7 @@ def plot_confusion_matrix(y_test, y_pred):
     plt.show()
 
 
-def venn_diagram(X,y):
+def venn_diagram(X, y):
     """
     Plot a Venn diagram for three sets.
 
@@ -53,21 +53,17 @@ def venn_diagram(X,y):
     Raises:
     TypeError: If any of the sets are not list or array-like.
     """
-    set1 = filters(X,y,"ReliefF")
+    set1 = filters(X, y, "ReliefF")
     set2 = filters(X, y, "Mrmr")
     set3 = filters(X, y, "U-test")
-
-    print(set1)
-    print(set2)
-    print(set3)
 
     set1format = set(tuple(set1))
     set2format = set(tuple(set2))
     set3format = set(tuple(set3))
 
-    venn_diagram = venn3([set1format, set2format, set3format], ("Set 1", "Set 2", "Set 3"))
+    venn_diagram = venn3([set1format, set2format, set3format], ("ReliefF", "Mrmr", "U-test"))
     plt.show()
-    #plt.savefig('../../reports/figures/venn.png')
+    # plt.savefig('../../reports/figures/venn.png')
 
 
 def compare_scores():
@@ -109,7 +105,6 @@ def compare_scores():
         axes[row, col].set_yticks(y_ticks)
         axes[row, col].grid(True)
 
-
     # Dopasowanie wykresów w układzie
     plt.tight_layout()
 
@@ -126,7 +121,7 @@ def time_compare():
     df3 = pd.read_csv(config['scores_file_U-test'])
     # Dane
     df1_sorted = df1.sort_values('Number of Features')
-    df2_sorted= df2.sort_values('Number of Features')
+    df2_sorted = df2.sort_values('Number of Features')
     df3_sorted = df3.sort_values('Number of Features')
     # Dane
     x_mrmr = df1_sorted['Number of Features']
@@ -137,7 +132,7 @@ def time_compare():
     y_d3 = df3_sorted['Time']
 
     # Tworzenie wykresu
-   # plt.plot(x_mrmr, y_d1, label='MRMR')
+    # plt.plot(x_mrmr, y_d1, label='MRMR')
     plt.plot(x_relief, y_d2, label='ReliefF')
     plt.plot(x_utest, y_d3, label='U-test')
     plt.xticks([5, 10, 20, 40, 60, 80, 100, 120, 140])

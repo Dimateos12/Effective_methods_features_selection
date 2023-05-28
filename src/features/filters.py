@@ -1,4 +1,4 @@
-# import mdfs
+import mdfs
 import numpy as np
 import pandas as pd
 from mrmr import mrmr_classif
@@ -8,7 +8,6 @@ from config.load_config import load_config
 from ReliefF import ReliefF
 
 config = load_config("my_configuration.yaml")
-
 
 
 def filters(x, y, module, num_of_features=config['n_features']):
@@ -33,8 +32,9 @@ def filters(x, y, module, num_of_features=config['n_features']):
     if module == "ReliefF":
         print("Trwa selekcja cech metoda ReliefF....")
         rf = ReliefF(n_features_to_keep=num_of_features, n_neighbors=5)
-        features = rf.fit_transform(x, y)
+        rf.fit_transform(x, y)
         selected_feature_indices = rf.top_features[:rf.n_features_to_keep]
+        print(selected_feature_indices)
         return selected_feature_indices
     elif module == "Mrmr":
         X = pd.DataFrame(x)
@@ -44,11 +44,12 @@ def filters(x, y, module, num_of_features=config['n_features']):
         return features.index
     elif module == "U-test":
         print("Trwa selekcja cech metoda U-test....")
-        X_feature = utest(x, y, )
+        X_feature = utest(x, y,num_of_features )
         return X_feature
-    # elif module == "MDFS":
-    #     y = y.astype(np.int32)
-    #     mdfs_feature = mdfs.run(x, y)
-    #     return mdfs_feature.copy()
-
-    # https://github.com/biocsuwb/EnsembleFS-package/blob/main/R/fs.mdfs.1D.R
+    elif module == "MDFS":
+        print("Trwa selekcja cech metoda MDFS....")
+        y = y.astype(np.int32)
+        my_array = np.asfortranarray(x)
+        mdfs_feature = mdfs.run(my_array, y, n_contrast=1)
+        print(mdfs_feature['relevant_variables'])
+        return mdfs_feature['relevant_variables']

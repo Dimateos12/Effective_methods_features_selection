@@ -54,12 +54,12 @@ def max_values():
     best_performance2 = find_best_performance(data2)
     best_performance3 = find_best_performance(data3)
 
-    print("Najlepsze wyniki dla pliku 1:")
+    print("Najlepsze wyniki dla pliku MRMR:")
     print(best_performance1)
 
-    print("Najlepsze wyniki dla pliku 2:")
+    print("Najlepsze wyniki dla pliku ReliefF:")
     print(best_performance2)
 
-    print("Najlepsze wyniki dla pliku 3:")
+    print("Najlepsze wyniki dla pliku U-test:")
     print(best_performance3)
 

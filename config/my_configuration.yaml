@@ -12,7 +12,7 @@ k_fold: 5
 repeat: 10
 
 #FeatureSelection
-n_features: 5
+n_features: 140
 filter: "U-test"
 
 

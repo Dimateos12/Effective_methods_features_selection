@@ -34,7 +34,6 @@ def filters(x, y, module, num_of_features=config['n_features']):
         rf = ReliefF(n_features_to_keep=num_of_features, n_neighbors=5)
         rf.fit_transform(x, y)
         selected_feature_indices = rf.top_features[:rf.n_features_to_keep]
-        print(selected_feature_indices)
         return selected_feature_indices
     elif module == "Mrmr":
         X = pd.DataFrame(x)

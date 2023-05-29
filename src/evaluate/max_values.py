@@ -45,14 +45,17 @@ def max_values():
     csv_file1 = config['scores_file_Mrmr']
     csv_file2 = config['scores_file_ReliefF']
     csv_file3 = config['scores_file_U-test']
+    csv_file4 = config['scores_file_MDFS']
 
     data1 = read_csv(csv_file1)
     data2 = read_csv(csv_file2)
     data3 = read_csv(csv_file3)
+    data4 = read_csv(csv_file4)
 
     best_performance1 = find_best_performance(data1)
     best_performance2 = find_best_performance(data2)
     best_performance3 = find_best_performance(data3)
+    best_performance4 = find_best_performance(data4)
 
     print("Najlepsze wyniki dla pliku MRMR:")
     print(best_performance1)
@@ -62,4 +65,7 @@ def max_values():
 
     print("Najlepsze wyniki dla pliku U-test:")
     print(best_performance3)
+
+    print("Najlepsze wyniki dla pliku MDFS:")
+    print(best_performance4)
 

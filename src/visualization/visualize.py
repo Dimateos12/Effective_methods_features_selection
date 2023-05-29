@@ -6,37 +6,9 @@ import matplotlib.pyplot as plt
 from config.load_config import load_config
 from features.filters import filters
 import venn
+import time
 
 config = load_config("my_configuration.yaml")
-
-
-def plot_confusion_matrix(y_test, y_pred):
-    """
-    Plots a confusion matrix for binary classification models.
-
-    Args:
-    y_test (array-like): True labels of the test data.
-    y_pred (array-like): Predicted labels of the test data.
-
-    Returns:
-    None. Displays a plot of the confusion matrix.
-    """
-    conf_mx = confusion_matrix(y_test, y_pred)
-    fig = plt.figure()
-    ax = fig.add_subplot(111)
-    cax = ax.matshow(conf_mx)
-    fig.colorbar(cax)
-    for i in range(conf_mx.shape[0]):
-        for j in range(conf_mx.shape[1]):
-            ax.annotate(
-                str(conf_mx[i][j]),
-                xy=(j, i),
-                horizontalalignment="center",
-                verticalalignment="center",
-                color="w",
-            )
-    plt.show()
-
 
 def venn_diagram(X, y):
     """
@@ -115,6 +87,24 @@ def compare_scores():
     plt.close()
 
 
-def time_compare():
-    df1 = pd.read_csv(config['scores_file_Mrmr'])
+def time_compare(X, y):
+    num_of_features = [5, 10, 20, 40, 60, 80, 100, 120, 140]
+    filters_names = ["ReliefF", "Mrmr", "U-test", "MDFS"]
+    time_taken = {name: [] for name in filters_names}
 
+    for num in num_of_features:
+        for name in filters_names:
+            start_time = time.time()
+            filters(X, y, name, num)
+            end_time = time.time()
+            elapsed_time = end_time - start_time
+            time_taken[name].append(elapsed_time)
+
+    for name in filters_names:
+        plt.plot(num_of_features, time_taken[name], marker='o', label=name)
+
+    plt.xlabel('Ilość cech')
+    plt.ylabel('Czas trwania  (sekundy)')
+    plt.title('Czas trwania vs ilość cech   ')
+    plt.legend()
+    plt.show()

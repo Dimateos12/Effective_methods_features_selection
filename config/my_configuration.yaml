@@ -30,5 +30,5 @@ scores_file_MDFS :  "./../reports/csv/10MeanResults_MDFS.csv"
 figures_path: "./../reports/figures/"
 
 #Mode
-mode: score
-#mode: visualization
+#mode: score
+mode: visualization

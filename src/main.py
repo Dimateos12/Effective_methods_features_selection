@@ -22,7 +22,8 @@ if __name__ == "__main__":
         evaluate_model_mean(lst_acc, lst_auc, lst_mcc, lst_f1, time.time() - t0, lst_amc)
     else:
         X, y, df = read_and_preprocess_data(os.path.join(config["data_directory"], config["data_name"]))
-        compare_scores()
+        #compare_scores()
+        #time_compare(X, y)
         #time_compare()
-        #max_values()
+        max_values()
         #venn_diagram(X, y)

@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from config.load_config import load_config
 from features.filters import filters
-from venn import venn4
+import venn
 
 config = load_config("my_configuration.yaml")
 
@@ -52,17 +52,14 @@ def venn_diagram(X, y):
     Raises:
     TypeError: If X or y are not list or array-like.
     """
-    set1 = filters(X, y, "ReliefF")
-    set2 = filters(X, y, "Mrmr")
-    set3 = filters(X, y, "U-test")
-    set4 = filters(X, y, "MDFS")
+    set1 = set(filters(X, y, "ReliefF"))
+    set2 = set(filters(X, y, "Mrmr"))
+    set3 = set(filters(X, y, "U-test"))
+    set4 = set(filters(X, y, "MDFS"))
 
-    set1format = {'key1': set(set1)}
-    set2format = {'key2': set(set2)}
-    set3format = {'key3': set(set3)}
-    set4format = {'key4': set(set4)}
-
-    venn4([set1format, set2format, set3format, set4format], names=["ReliefF", "MRMR", "U-test", "MDFS"])
+    labels = venn.get_labels([set1, set2, set3, set4], fill=['number'])
+    fig, ax = venn.venn4(labels, names=["ReliefF", "MRMR", "U-test", "MDFS"])
+    plt.show()
 
     plt.show()
     # plt.savefig('../../reports/figures/venn.png')
@@ -120,37 +117,4 @@ def compare_scores():
 
 def time_compare():
     df1 = pd.read_csv(config['scores_file_Mrmr'])
-    df2 = pd.read_csv(config['scores_file_ReliefF'])
-    df3 = pd.read_csv(config['scores_file_U-test'])
-    # Dane
-    df1_sorted = df1.sort_values('Number of Features')
-    df2_sorted = df2.sort_values('Number of Features')
-    df3_sorted = df3.sort_values('Number of Features')
-    # Dane
-    x_mrmr = df1_sorted['Number of Features']
-    x_relief = df2_sorted['Number of Features']
-    x_utest = df3_sorted['Number of Features']
-    y_d1 = df1_sorted['Time']
-    y_d2 = df2_sorted['Time']
-    y_d3 = df3_sorted['Time']
 
-    # Tworzenie wykresu
-    # plt.plot(x_mrmr, y_d1, label='MRMR')
-    plt.plot(x_relief, y_d2, label='ReliefF')
-    plt.plot(x_utest, y_d3, label='U-test')
-    plt.xticks([5, 10, 20, 40, 60, 80, 100, 120, 140])
-
-    # Dodanie etykiet i tytułu
-    plt.xlabel("Ilość cech")
-    plt.ylabel("Czas (sekundy)")
-    plt.title("Porównanie wydajności czasowej algorytmów")
-
-    # Dodanie legendy
-    plt.legend()
-    plt.grid()
-    # Wyświetlenie wykresu
-    plt.tight_layout()
-    plt.show()
-
-    plt.savefig(config['figures_path'] + "compare_time.png")
-    plt.close()

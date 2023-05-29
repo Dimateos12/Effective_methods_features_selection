@@ -13,11 +13,11 @@ repeat: 10
 
 #FeatureSelection
 n_features: 5
-filter: "MDFS"
+filter: "U-test"
 
 
 #Files_name
-name_file_30_repeat: "10MeanResults_MDFS.csv"
+name_file_30_repeat: "10MeanResults_U-test.csv"
 
 #File_Scores_Path
 scores_file_Mrmr : "./../reports/csv/10MeanResults_MRMR.csv"
@@ -30,5 +30,5 @@ scores_file_MDFS :  "./../reports/csv/10MeanResults_MDFS.csv"
 figures_path: "./../reports/figures/"
 
 #Mode
-#mode: score
-mode: visualization
+mode: score
+#mode: visualization

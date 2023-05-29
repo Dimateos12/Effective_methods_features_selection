@@ -23,6 +23,6 @@ if __name__ == "__main__":
     else:
         X, y, df = read_and_preprocess_data(os.path.join(config["data_directory"], config["data_name"]))
         compare_scores()
-        time_compare()
-        max_values()
-        venn_diagram(X,y)
+        #time_compare()
+        #max_values()
+        #venn_diagram(X, y)

@@ -49,6 +49,7 @@ def filters(x, y, module, num_of_features=config['n_features']):
     elif module == "MDFS":
         print("Trwa selekcja cech metoda MDFS....")
         y = y.astype(np.int32)
-        mdfs_feature = mdfs.compute_max_ig(x, y)
-        print(mdfs_feature)
-        return mdfs_feature.max_igs
+        my_array = np.asfortranarray(x)
+        mdfs_feature = mdfs.compute_max_ig(my_array, y)
+        indices = np.argsort(mdfs_feature.max_igs)[::-1][:num_of_features]
+        return indices

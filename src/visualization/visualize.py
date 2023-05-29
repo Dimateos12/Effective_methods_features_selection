@@ -1,11 +1,11 @@
 import pandas as pd
 from matplotlib import pyplot as plt
-from matplotlib_venn import venn3
 from sklearn.metrics import confusion_matrix
 import numpy as np
 import matplotlib.pyplot as plt
 from config.load_config import load_config
 from features.filters import filters
+from venn import venn4
 
 config = load_config("my_configuration.yaml")
 
@@ -40,28 +40,30 @@ def plot_confusion_matrix(y_test, y_pred):
 
 def venn_diagram(X, y):
     """
-    Plot a Venn diagram for three sets.
+    Plot a Venn diagram for four sets.
 
     Args:
-    set1 (list or array-like): First set of values.
-    set2 (list or array-like): Second set of values.
-    set3 (list or array-like): Third set of values.
+    X (list or array-like): Data points.
+    y (list or array-like): Class labels.
 
     Returns:
     None: Displays the Venn diagram plot.
 
     Raises:
-    TypeError: If any of the sets are not list or array-like.
+    TypeError: If X or y are not list or array-like.
     """
     set1 = filters(X, y, "ReliefF")
     set2 = filters(X, y, "Mrmr")
     set3 = filters(X, y, "U-test")
+    set4 = filters(X, y, "MDFS")
 
-    set1format = set(tuple(set1))
-    set2format = set(tuple(set2))
-    set3format = set(tuple(set3))
+    set1format = {'key1': set(set1)}
+    set2format = {'key2': set(set2)}
+    set3format = {'key3': set(set3)}
+    set4format = {'key4': set(set4)}
 
-    venn_diagram = venn3([set1format, set2format, set3format], ("ReliefF", "Mrmr", "U-test"))
+    venn4([set1format, set2format, set3format, set4format], names=["ReliefF", "MRMR", "U-test", "MDFS"])
+
     plt.show()
     # plt.savefig('../../reports/figures/venn.png')
 
@@ -70,19 +72,20 @@ def compare_scores():
     df1 = pd.read_csv(config['scores_file_Mrmr'])
     df2 = pd.read_csv(config['scores_file_ReliefF'])
     df3 = pd.read_csv(config['scores_file_U-test'])
+    df4 = pd.read_csv(config['scores_file_MDFS'])
     # Dane
     dataframes = [df1.sort_values(by='Number of Features'), df2.sort_values(by='Number of Features'),
-                  df3.sort_values(by='Number of Features')]
+                  df3.sort_values(by='Number of Features'), df4.sort_values(by='Number of Features')]
     titles = [df1['Feature Selection Method'].unique()[0], df2['Feature Selection Method'].unique()[0],
-              df3['Feature Selection Method'].unique()[0]]
+              df3['Feature Selection Method'].unique()[0], df4['Feature Selection Method'].unique()[0]]
 
     # Tworzenie podwykresów
     fig, axes = plt.subplots(2, 2, figsize=(10, 8))
 
     # Iteracja przez DataFrame'y i tworzenie wykresów
     metrics = ['ACC', 'AUC', 'MCC', 'F1']
-    colors = ['blue', 'orange', 'green']
-    algorithms = ['MRR', 'U-test', 'ReliefF']
+    colors = ['blue', 'orange', 'green', 'brown']
+    algorithms = ['MRR', 'U-test', 'ReliefF', 'MDFS']
 
     for i, metric in enumerate(metrics):
         row = i // 2  # Wiersz podwykresu

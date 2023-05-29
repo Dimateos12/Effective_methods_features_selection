@@ -9,24 +9,26 @@ model_name: "RandomForest"
 
 #CrossValidation
 k_fold: 5
-repeat: 2
+repeat: 10
 
 #FeatureSelection
-n_features: 100
+n_features: 5
 filter: "MDFS"
 
 
 #Files_name
-name_file_30_repeat: "10MeanResults_ReliefF.csv"
+name_file_30_repeat: "10MeanResults_MDFS.csv"
 
 #File_Scores_Path
 scores_file_Mrmr : "./../reports/csv/10MeanResults_MRMR.csv"
 scores_file_ReliefF :  "./../reports/csv/10MeanResults_ReliefF.csv"
 scores_file_U-test :  "./../reports/csv/10MeanResults_U-test.csv"
+scores_file_MDFS :  "./../reports/csv/10MeanResults_MDFS.csv"
+
 
 #Figures_Path
 figures_path: "./../reports/figures/"
 
 #Mode
-mode: score
-#mode: visualization
+#mode: score
+mode: visualization

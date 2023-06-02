@@ -5,37 +5,37 @@ import numpy as np
 import matplotlib.pyplot as plt
 from config.load_config import load_config
 from features.filters import filters
-import venn
+#import venn
 import time
 
 config = load_config("my_configuration.yaml")
 
 
-def venn_diagram(X, y):
-    """
-    Plot a Venn diagram for four sets.
-
-    Args:
-    X (list or array-like): Data points.
-    y (list or array-like): Class labels.
-
-    Returns:
-    None: Displays the Venn diagram plot.
-
-    Raises:
-    TypeError: If X or y are not list or array-like.
-    """
-    set1 = set(filters(X, y, "ReliefF"))
-    set2 = set(filters(X, y, "Mrmr"))
-    set3 = set(filters(X, y, "U-test"))
-    set4 = set(filters(X, y, "MDFS"))
-
-    labels = venn.get_labels([set1, set2, set3, set4], fill=['number'])
-    fig, ax = venn.venn4(labels, names=["ReliefF", "MRMR", "U-test", "MDFS"])
-    plt.show()
-
-    plt.show()
-    # plt.savefig('../../reports/figures/venn.png')
+# def venn_diagram(X, y):
+#     """
+#     Plot a Venn diagram for four sets.
+#
+#     Args:
+#     X (list or array-like): Data points.
+#     y (list or array-like): Class labels.
+#
+#     Returns:
+#     None: Displays the Venn diagram plot.
+#
+#     Raises:
+#     TypeError: If X or y are not list or array-like.
+#     """
+#     set1 = set(filters(X, y, "ReliefF"))
+#     set2 = set(filters(X, y, "Mrmr"))
+#     set3 = set(filters(X, y, "U-test"))
+#     set4 = set(filters(X, y, "MDFS"))
+#
+#     labels = venn.get_labels([set1, set2, set3, set4], fill=['number'])
+#     fig, ax = venn.venn4(labels, names=["ReliefF", "MRMR", "U-test", "MDFS"])
+#     plt.show()
+#
+#     plt.show()
+#     # plt.savefig('../../reports/figures/venn.png')
 
 
 def compare_scores():

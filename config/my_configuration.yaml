@@ -17,7 +17,7 @@ filter: "Mrmr"
 
 
 #Files_name
-name_file_30_repeat: "K-fold_ReliefF.csv"
+name_file_30_repeat: "K-fold_MRMR.csv"
 
 #File_Scores_Path
 scores_file_Mrmr : "./../reports/csv/10MeanResults_MRMR.csv"

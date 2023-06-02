@@ -1,4 +1,4 @@
-import mdfs
+#import mdfs
 import numpy as np
 import pandas as pd
 from mrmr import mrmr_classif
@@ -45,10 +45,10 @@ def filters(x, y, module, num_of_features=config['n_features']):
         print("Trwa selekcja cech metoda U-test....")
         X_feature = utest(x, y, num_of_features)
         return X_feature
-    elif module == "MDFS":
-        print("Trwa selekcja cech metoda MDFS....")
-        y = y.astype(np.int32)
-        my_array = np.asfortranarray(x)
-        mdfs_feature = mdfs.compute_max_ig(my_array, y)
-        indices = np.argsort(mdfs_feature.max_igs)[::-1][:num_of_features]
-        return indices
+    # elif module == "MDFS":
+    #     print("Trwa selekcja cech metoda MDFS....")
+    #     y = y.astype(np.int32)
+    #     my_array = np.asfortranarray(x)
+    #     mdfs_feature = mdfs.compute_max_ig(my_array, y)
+    #     indices = np.argsort(mdfs_feature.max_igs)[::-1][:num_of_features]
+    #     return indices

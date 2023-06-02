@@ -9,7 +9,7 @@ from evaluate.max_values import max_values
 from visualization.visualize import time_compare
 from visualization.visualize import venn_diagram
 from features.filters import filters
-
+from visualization.visualize import tempPlotK
 
 if __name__ == "__main__":
 
@@ -25,5 +25,6 @@ if __name__ == "__main__":
         #compare_scores()
         #time_compare(X, y)
         #time_compare()
-        max_values()
+        #max_values()
         #venn_diagram(X, y)
+        tempPlotK()

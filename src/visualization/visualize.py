@@ -10,6 +10,7 @@ import time
 
 config = load_config("my_configuration.yaml")
 
+
 def venn_diagram(X, y):
     """
     Plot a Venn diagram for four sets.
@@ -107,4 +108,22 @@ def time_compare(X, y):
     plt.ylabel('Czas trwania  (sekundy)')
     plt.title('Czas trwania vs ilość cech   ')
     plt.legend()
+    plt.show()
+
+
+def tempPlotK():
+    data = pd.read_csv(config['temp'])
+
+    # Dodanie nowej kolumny z wartościami k
+    data['k'] = [3, 5, 10]
+
+    # Narysowanie wykresu
+    plt.plot(data['k'], data['MCC'], marker='o')
+    plt.xlabel('Wartość k')
+    x_ticks = np.arange(3, 10.05, 0.5)
+    y_ticks = np.arange(0.1, 0.75, 0.05)
+    plt.xticks(x_ticks)
+    plt.yticks(y_ticks)
+    plt.ylabel('MCC')
+    plt.title('Porównanie krotności kroswalidacji od MCC')
     plt.show()

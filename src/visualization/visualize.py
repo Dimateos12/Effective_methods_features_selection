@@ -111,19 +111,29 @@ def time_compare(X, y):
     plt.show()
 
 
-def tempPlotK():
-    data = pd.read_csv(config['temp'])
+def k_fold_plot():
+    files = [config["k_mdfs"], config["k_mrmr"], config["k_u-test"], config["k_reliefF"]]
+    names = ["MDFS", "MRMR", "U-test", "ReliefF"]
+    # Utworzenie subplotów
+    fig, axs = plt.subplots(2, 2, figsize=(10, 8))
+    axs = axs.flatten()
 
-    # Dodanie nowej kolumny z wartościami k
-    data['k'] = [3, 5, 10]
+    # Dla każdego pliku
+    for i, file in enumerate(files):
+        # Wczytanie danych
+        data = pd.read_csv(file)
 
-    # Narysowanie wykresu
-    plt.plot(data['k'], data['MCC'], marker='o')
-    plt.xlabel('Wartość k')
-    x_ticks = np.arange(3, 10.05, 0.5)
-    y_ticks = np.arange(0.1, 0.75, 0.05)
-    plt.xticks(x_ticks)
-    plt.yticks(y_ticks)
-    plt.ylabel('MCC')
-    plt.title('Porównanie krotności kroswalidacji od MCC')
+        # Dodanie nowej kolumny z wartościami k
+        data['k'] = [3, 5, 10]
+
+        # Narysowanie wykresu w odpowiednim subplotcie
+        axs[i].plot(data['k'], data['MCC'], marker='o')
+        axs[i].set_title(f'{names[i]}')
+        axs[i].set_xlabel('Krotność kroswalidacji')
+        axs[i].set_ylabel('Wartość MCC')
+        axs[i].set_xticks(np.arange(3, 10.05, 0.5))
+        axs[i].set_yticks(np.arange(0.1, 0.75, 0.05))
+
+    # Dostosowanie układu subplotów
+    plt.tight_layout()
     plt.show()

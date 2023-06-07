@@ -8,27 +8,32 @@ n_estimators: 200
 model_name: "RandomForest"
 
 #CrossValidation
-k_fold: 10
+k_fold: 5
 repeat: 10
 
 #FeatureSelection
 n_features: 100
-filter: "Mrmr"
+filter: "ReliefF"
 
 
-#Files_name
-name_file_30_repeat: "K-fold_MRMR.csv"
+#File_name_output
+name_file_30_repeat: "ReliefF_MNIST.csv"
 
 #File_Scores_Path
 scores_file_Mrmr : "./../reports/csv/10MeanResults_MRMR.csv"
 scores_file_ReliefF :  "./../reports/csv/10MeanResults_ReliefF.csv"
 scores_file_U-test :  "./../reports/csv/10MeanResults_U-test.csv"
 scores_file_MDFS :  "./../reports/csv/10MeanResults_MDFS.csv"
-temp :  "./../reports/csv/K_MDFS.csv"
+
+#K_fold_Scores_Path
+k_mdfs :  "./../reports/csv/K-fold_MDFS.csv"
+k_mrmr :  "./../reports/csv/K-fold_MRMR.csv"
+k_reliefF :  "./../reports/csv/K-fold_ReliefF.csv"
+k_u-test :  "./../reports/csv/K-fold_MDFS.csv"
 
 #Figures_Path
 figures_path: "./../reports/figures/"
 
 #Mode
-mode: score
+mode: test
 #mode: visualization

@@ -36,6 +36,7 @@ def filters(x, y, module, num_of_features=config['n_features']):
         selected_feature_indices = rf.top_features[:rf.n_features_to_keep]
         return selected_feature_indices
     elif module == "Mrmr":
+        print(x)
         X = pd.DataFrame(x)
         y = pd.Series(y)
         selected_features_names = mrmr_classif(X=X, y=y, K=num_of_features)

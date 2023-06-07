@@ -9,8 +9,10 @@ from evaluate.max_values import max_values
 from visualization.visualize import time_compare
 #from visualization.visualize import venn_diagram
 from features.filters import filters
-from visualization.visualize import tempPlotK
+from visualization.visualize import k_fold_plot
+import numpy as np
 from sklearn.datasets import fetch_openml
+
 if __name__ == "__main__":
 
     t0 = time.time()
@@ -24,8 +26,10 @@ if __name__ == "__main__":
     if config['mode'] == 'test':
         mnist = fetch_openml('mnist_784', version=1, as_frame=False)
         X, y = mnist["data"], mnist["target"]
-        y = (y == 5)
-        lst_acc, lst_auc, lst_f1, lst_mcc, lst_amc = run_cv(X, y, config)
+        y = y.astype(np.uint8)
+        y_train = (y == 5)
+        y_train = y_train.astype(int)
+        lst_acc, lst_auc, lst_f1, lst_mcc, lst_amc = run_cv(X, y_train, config)
         evaluate_model_mean(lst_acc, lst_auc, lst_mcc, lst_f1, time.time() - t0, lst_amc)
 
     else:
@@ -35,5 +39,5 @@ if __name__ == "__main__":
         #time_compare()
         #max_values()
         #venn_diagram(X, y)
-        #tempPlotK()
+        #k_fold_plot()
 
